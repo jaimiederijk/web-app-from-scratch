@@ -23,11 +23,11 @@
 			var sections = document.querySelectorAll("section");
 			var matchingSection = document.querySelector(id);
 
-			for (var i = 0; i < sections.length; i++) {
+			for (var i = 0; i < sections.length; i++) { //hide all sections
 				sections[i].classList.add("hidden");
 			};
 
-			matchingSection.classList.remove("hidden");
+			matchingSection.classList.remove("hidden");//show the matching section
 
 		}
 	};
