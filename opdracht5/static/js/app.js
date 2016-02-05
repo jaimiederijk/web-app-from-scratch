@@ -1,10 +1,9 @@
 'use strict';
 (function(){
-	
+
 	var app = {
 		init: function() {
 			routes.init();
-
 		}
 	};
 
@@ -17,16 +16,14 @@
 
 	var sections = {
 		toggle: function(route) {
-			var id = route ? route : window.location.hash;
+			var route = window.location.hash;
 			var sections = document.querySelectorAll("section");
-			var matchingSection = document.querySelector(id);
 
-			for (var i = 0; i < sections.length; i++) {
-				sections[i].classList.add("hidden");
+			[].forEach.call(sections, function (section) {
+				section.classList.add("hidden");
 			};
 
 			matchingSection.classList.remove("hidden");
-
 		}
 	};
 
