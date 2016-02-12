@@ -1,5 +1,5 @@
 'use strict';
-//(function(){
+(function(){
 
 	var app = {
 		init: function() {
@@ -145,4 +145,4 @@
 	//var testData = data.requestDataPeg('https://api.wheretheiss.at/v1/' + 'satellites/25544');
 
 
-//})();
+})();
