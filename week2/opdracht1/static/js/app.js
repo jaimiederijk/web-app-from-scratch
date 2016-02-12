@@ -11,16 +11,6 @@
 
 	var routes = {
 		init: function() {
-			routie({
-			    'home': function() {
-			      
-			    },
-			    'who': function() {
-			      
-			    },
-			    'why': function() {
-			    }
-			});
 			var currentHash = window.location.hash;
 			var hash = currentHash ? currentHash : "#start";//if there is a hash stay there else go to start
 			sections.toggle(hash);
@@ -44,7 +34,7 @@
 		refreshIssMarker : function () {
 			var markerInterval = window.setInterval(call ,2000);
 			function call () {
-				data.requestDataIss(data.baseUrl+"satellites/25544","issData")
+				data.requestDataIss(data.issBaseUrl+"satellites/25544","issData")
 			}
 		}
 	};
@@ -70,7 +60,7 @@
 			//debugger
 		},
 		searchMovie :function(input) {
-			var url = this.movieBaseUrl + 'search/multi?query=' + input +'?api_key=' + this.apiKey;
+			var url = 'https://api.themoviedb.org/3/' + 'search/multi?query=' + input +'?api_key=6cb38eaa7fe8c8602cce052374cdf3ad';
 
 			promise.get(url).then(function(error, text, xhr) {
 				if (error) {
