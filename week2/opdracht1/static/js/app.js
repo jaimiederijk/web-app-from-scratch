@@ -6,7 +6,8 @@
 		movies: document.querySelector('#searchmovies'),
 		movie: document.querySelector('#onemovie'),
 		home: document.querySelector('#start'),
-		iss: document.querySelector('#isstracker')
+		iss: document.querySelector('#isstracker'),
+		movieSearch: document.querySelector('#searchmovies form')
 	};
 
 	var app = {
@@ -25,7 +26,7 @@
 			});
 			routie('movies', function() {
 				sections.displaySection("movies");
-				document.querySelector("#searchmovies form").addEventListener("submit", function () {
+				htmlElements.movieSearch.addEventListener("submit", function () {
 					sections.setupMovieSearched(event.target[0].value);
 				});//
 			});
@@ -48,8 +49,8 @@
 		setupMovieSearched : function (input) {
 			if (data.searchedMovies) {
 
-				data.oldSearchedMovies =_.filter(data.searchedMovies, function(vote_average){
-					return vote_average > 5.5;
+				data.oldSearchedMovies = _.filter(data.searchedMovies.results, function(item){
+					return item.vote_average > 5.5;
 				});
 			}
 			data.searchMovie(input,"searchedMovies");
