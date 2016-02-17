@@ -15,23 +15,52 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#start" title="">Start</a></li>
-                <li><a href="#best-practices" title="">Best Practices</a></li>
+                <li><a href="#" title="">Start</a></li>
+                <li><a href="#movies" title="">movies</a></li>
+                <li><a href="#iss" title="">iss</a></li>
             </ul>
         </nav>
     </header>
-    <div id="map-canvas"></div>
-</div>
+
     <section id="start">
     	<h1>Start</h1>
     </section>
-    <section id="best-practices">
-    	<h1>Best practices</h1>
+    <section id="searchmovies">
+    	<h1>Movies</h1>
+        <form>
+            <legend>Search movie</legend>
+            <label>
+                <input  type="text" required>
+            </label>
+            <button role="button" type="submit">search</button>
+        </form>
+        <div id="template">
+            <article >
+                <a data-bind="deeplink">
+                    <h2 data-bind="title"></h2>
+                    <p data-bind="overview"></p>
+                </a>
+            </article>
+        </div>
 
+
+    </section>
+    <section id="onemovie">
+        <div id="template-movie">
+            <article >
+                    <h2 data-bind="title"></h2>
+                    <p data-bind="overview"></p>
+            </article>
+        </div>
+    </section>
+    <section id="isstracker">
+        <div id="map-canvas"></div>
     </section>
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="static/js/transparency.min.js"></script>
     <script type="text/javascript" src="static/js/promise.js"></script>
+    <script type="text/javascript" src="static/js/underscore-min.js"></script>
     <script type="text/javascript" src="static/js/routie.min.js"></script>
     <script type="text/javascript" src="static/js/app.js"></script>
 </body>
