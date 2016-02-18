@@ -2,13 +2,16 @@
 //(function(){
 
 	var htmlElements = {
+		body: document.querySelector('body'),
+		navLi: document.querySelectorAll('nav li'),
 		sections: document.querySelectorAll('section'),
 		movies: document.querySelector('#searchmovies'),
 		movie: document.querySelector('#onemovie'),
 		home: document.querySelector('#start'),
 		iss: document.querySelector('#isstracker'),
 		movieSearch: document.querySelector('#searchmovies form'),
-		moviesTemplate: document.querySelector("#template-movies")
+		moviesTemplate: document.querySelector("#template-movies"),
+		moviesTemplateLoader: document.querySelector("#template-movies div")
 	};
 
 	var app = {
@@ -17,7 +20,9 @@
 			routes.init();
 			googleMap.setupMap();
 			sections.refreshIssMarker.markerInterval();
-			document.addEventListener("touchstart", function(){}, true)
+			
+			ui.setupEvents();
+			ui.setupGestures();
 		}
 	};
 
@@ -28,9 +33,7 @@
 			});
 			routie('movies', function() {
 				sections.displaySection("movies");
-				htmlElements.movieSearch.addEventListener("submit", function () {
-					sections.setupMovieSearched(event.target[0].value);
-				});//
+				//
 			});
 			routie('iss', function() {
 				sections.displaySection("iss");
@@ -46,32 +49,55 @@
 		}
 
 	};
-
-
-	var ux = {
-		addTouchListener : function (buttons) {
-			var buttons = buttons;
-			for (var i = 0; i < buttons.length; i++) {
-				buttons[i]
+	var ui = {
+		setupEvents : function () {
+			document.addEventListener("touchstart", function(){}, true)
+			htmlElements.movieSearch.addEventListener("submit", function () {
+					sections.setupMovieSearched(event.target[0].value);
+			});
+		},
+		setupGestures : function () {
+			var hammertime = new Hammer(htmlElements.body);
+			hammertime.on('swiperight', function(ev) {
+			    ui.switchSection("right");			    
+			});
+			hammertime.on('swipeleft', function(ev) {
+			    ui.switchSection("left");			    
+			});
+		},
+		switchSection : function (direction) {
+			var newShow;
+			var newSection;
+			var current = _.findIndex(htmlElements.navLi, function(item) {
+				return item.dataset.section==window.location.hash;
+			})			
+			if ( direction === "right" ) {
+				newShow = current == htmlElements.navLi.length-1 ? 0 : current+1;	
+			} else if ( direction === "left" ) {
+				newShow = current == 0 ? htmlElements.navLi.length-1 : current-1;
 			}
-			
+			newSection = htmlElements.navLi[newShow].dataset.section;
+			routie(newSection);
 		}
 	}
 
 
 	var sections = {
 		setupMovieSearched : function (input) {
-			//htmlElements.moviesTemplate.classList.add("load-movies");
+			
 			if (data.searchedMovies) {
-
+				Transparency.render(htmlElements.moviesTemplate,"");
 				data.oldSearchedMovies = _.filter(data.searchedMovies.results, function(item){
 					return item.vote_average > 5.5;
 				});
 			}
+			htmlElements.moviesTemplateLoader.classList.add("loader");	
+			
 			data.searchMovie(input,"searchedMovies");
 		},
 		renderMovieSearched : function () {
-			var temp = document.querySelector("#template");
+			var temp = htmlElements.moviesTemplate;
+
 			var movies = data.searchedMovies;
 			var directives = {
 				deeplink : {
@@ -80,6 +106,7 @@
 					}
 				}
 			};
+			htmlElements.moviesTemplateLoader.classList.remove("loader");
 			Transparency.render(temp,movies.results,directives);
 		},
 		renderMoviePage : function (id) {
@@ -96,7 +123,7 @@
 		hideAllSections : function () {
 			var sections = htmlElements.sections;
 			for (var i = 0; i < sections.length; i++) { //hide all sections via loop
-
+				sections[i].classList.remove("show");
 				sections[i].classList.add("hidden");
 				//sections[i].classList.remove("notransition");
 			};
@@ -105,6 +132,7 @@
 			this.hideAllSections();
 			var section = htmlElements[sectionName];
 			section.classList.remove("hidden");
+			section.classList.add("show");
 		},
 		refreshIssMarker : {
 			markerInterval : function() {this.interval = window.setInterval(this.sendIssRequest ,2000)},
@@ -149,7 +177,8 @@
 			        return;
 			    };
 			    self[target] = JSON.parse(text);
-			    sections.renderMovieSearched();
+			    setTimeout(function(){ sections.renderMovieSearched(); }, 1000); //test load animation
+			    //sections.renderMovieSearched();
 			    //console.log(JSON.parse(text));
 			});
 		}
