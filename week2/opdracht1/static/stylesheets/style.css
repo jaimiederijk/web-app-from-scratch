@@ -1,3 +1,7 @@
+header nav ul {
+	display: flex;
+	flex-direction: row;
+}
 section {
 	width: 35em;
 	transition:0s;

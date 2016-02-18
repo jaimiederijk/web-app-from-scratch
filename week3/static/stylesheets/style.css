@@ -1,0 +1,73 @@
+nav ul {
+	display: flex;
+	flex-wrap:  wrap;
+}
+nav a {
+	transition: 0.1s;
+	color: white;
+	background-color: rgb(61, 53, 139);
+	display: block;
+	padding: 2em;
+}
+nav li {
+	list-style: none;
+    margin: 2em;
+}
+section {
+	max-width: 35em;
+	transition:0s;
+	position: absolute;
+}
+article a {
+	text-decoration: none;
+	color: black;
+}
+article:hover {
+	background-color: rgba(233,233,233,0.5);
+}
+@keyframes grow {
+    0% { 
+    	background-color: rgb(255,255,255); 
+    	height: 0em;
+    }
+    100% { 
+    	background-color: rgb(220,220,220)
+    	height:100%;
+    }
+}
+@keyframes slideDown{
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(500);
+    opacity: 1;
+  }
+}
+/*#template-movies {
+	transform-origin: top;
+	background-color: rgb(220,220,220);
+	height:1px;
+	z-index: -5;
+}*/
+.load-movies {	
+	animation-name: slideDown;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.hidden {
+	opacity: 0;
+	z-index: -2;
+}
+.notransition {
+	transition:none;
+}
+#map-canvas{
+  height: 500px;
+  width: 700px;
+}
+a:active {
+	background-color: green;
+	transform: translateY(5px);
+}
