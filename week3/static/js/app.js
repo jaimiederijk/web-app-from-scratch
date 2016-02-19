@@ -171,8 +171,14 @@ var sections = {
 				return item.vote_average > 5.5;
 			});
 		}
+		//htmlElements.moviesTemplate.classList.add("load-movies");
+		setTimeout(function(){
+			htmlElements.moviesTemplateLoader.classList.add("loader");
+
+		}, 200);
+
 		htmlElements.moviesTemplateLoader.classList.add("loader");	
-		
+
 		data.searchMovie(input,"searchedMovies");
 	},
 	renderMovieSearched : function () {
