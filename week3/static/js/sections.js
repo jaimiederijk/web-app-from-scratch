@@ -44,12 +44,6 @@ var sections = {
 		var temp = htmlElements.movieTemplate;
 		Transparency.render(temp,movie);
 	},
-	// firstHideAllSections : function() {
-	// 	var sections = htmlElements.sections;
-	// 	for (var i = 0; i < sections.length; i++) { //hide all sections via loop
-	// 		sections[i].classList.add("notransition");
-	// 	};
-	// },
 	hideAllSections : function () {
 		var sections = htmlElements.sections;
 		for (var i = 0; i < sections.length; i++) { //hide all sections via loop

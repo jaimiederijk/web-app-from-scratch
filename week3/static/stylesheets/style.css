@@ -33,6 +33,11 @@ form {
   padding-top: 2em;
   background-color: white;
 }
+#template-movie {
+    padding: 1em;
+    max-width: 35em;
+    background-color: white;
+}
 header {
   background-image: linear-gradient(90deg,#77A7CA 11px, transparent 0), 
   linear-gradient(90deg,rgba(67, 70, 48, 0.75) 23px, transparent 0), 
