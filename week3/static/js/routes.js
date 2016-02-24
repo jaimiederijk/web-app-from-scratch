@@ -4,7 +4,8 @@ var data = require('./data');
 var routes = {
 	init: function() {
 		routie('', function() {
-			sections.displaySection("home");
+			routie('movies');
+			//sections.displaySection("home");
 		});
 		routie('movies', function() {
 			sections.displaySection("movies");

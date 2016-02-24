@@ -6,7 +6,7 @@ var data = {
 		movieApiKey:"3974f78e9e581f953c413271e51a527a",
 	},
 	movieSearchTerms : [
-		"western","ocean","war","school","crime","murder","space"
+		"western","ocean","war","rome","crime","murder","space","china","school"
 	],
 	requestDataIss:function (url, target) {	//target = under what name should the the data be saved
 		var self = this;
@@ -16,7 +16,7 @@ var data = {
 		promise.get(url).then(function(error, text, xhr) {
 		    if (error) {
 		    	sections.refreshIssMarker.stopInterval();
-		        alert('Error ' + xhr.status);
+		        console.log('Error ' + xhr.status);
 		        return;
 		    }
 		    self[target] = JSON.parse(text);
@@ -153,7 +153,8 @@ var data = require('./data');
 var routes = {
 	init: function() {
 		routie('', function() {
-			sections.displaySection("home");
+			routie('movies');
+			//sections.displaySection("home");
 		});
 		routie('movies', function() {
 			sections.displaySection("movies");
